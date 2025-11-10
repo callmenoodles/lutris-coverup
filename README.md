@@ -12,7 +12,7 @@ Cover Up is a CLI application meant to aid with downloading missing covers, bann
 > This project is a WIP and currently fetches assets from SteamGridDB only. Not all games on SteamGridDB have assets and there is no fallback option yet. However, it is possible to upload assets to SteamGridDB.
  
 ## Installation
-1. Download `lutris-coverup` from [releases](https://github.com/callmenoodles/lutris-coverup/releases)
+1. Download `lutris-coverup` from [releases](https://github.com/callmenoodles/lutris-coverup/releases).
 2. Optionally place the binary in `/usr/local/bin` to make it available system-wide.
 
 ## Usage
@@ -38,9 +38,9 @@ $ lutris-coverup
 
 #### API Key
 You need to pass a SteamGridDB API key for this application to work.
-1. Sign in to [SteamGridDB](https://steamgriddb.com) with your Steam account
-2. Go to [Preferences > API](https://www.steamgriddb.com/profile/preferences/api)
-3. Copy your API key
+1. Sign in to [SteamGridDB](https://steamgriddb.com) with your Steam account.
+2. Go to [Preferences > API](https://www.steamgriddb.com/profile/preferences/api).
+3. Copy your API key.
 
 #### Resize
 Lutris fetches its assets from IGDB and resizes them. Covers and banners fetched from SteamGridDB are not the same aspect ratio, so the covers are a bit more narrow. The `--resize` flag, described in [Usage](#usage), allows you to specify whether the assets should be stretched, cropped, or left as is after resizing them.
@@ -62,5 +62,5 @@ Lutris stores game covers in `coverart`, banners in `banners`, and all your game
 Lutris stores game icons in a separate directory `icons/hicolor/128x128/apps`.
 
 ## Credits
-- [@Deytron](https://github.com/Deytron) for the foundation in [Lutris Cover Art Downloader](https://github.com/Deytron/lutris-art-downloader)
-- [SteamGridDB](https://www.steamgriddb.com/) for the assets
+- [@Deytron](https://github.com/Deytron) for the foundation in [Lutris Cover Art Downloader](https://github.com/Deytron/lutris-art-downloader).
+- [SteamGridDB](https://www.steamgriddb.com/) for the assets.
