@@ -1,0 +1,53 @@
+[project]
+name = "lutris-coverup"
+version = "0.1.0"
+authors = [
+    { name = "callmenoodles", email = "noodles@udon.md" },
+]
+description = "Download missing cover art, banners, and icons for Lutris"
+readme = "README.md"
+requires-python = "==3.13.*"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Games/Entertainment"
+]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords=["Lutris", "games", "cover", "banner", "icon"]
+dependencies = [
+    "click>=8.3.0",
+    "requests>=2.32.5",
+    "dotenv>=0.9.9",
+    "python-steamgriddb>=1.0.5",
+    "pillow>=12.0.0"
+]
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.16.0",
+    "black>=25.9.0",
+    "flake8>=7.3.0",
+    "mypy>=1.18.2",
+    "types-requests>=2.32.4.20250913",
+    "pre-commit>=4.3.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/callmenoodles/lutris-coverup"
+Repository = "https://github.com/callmenoodles/lutris-coverup"
+Issues = "https://github.com/callmenoodles/lutris-coverup/issues"
+
+[project.scripts]
+lucov = "lutris_coverup.cli:cli"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.scripts]
+cli = "python -m lutris_coverup"
+format = "black src"
+lint = "flake8 src"
+typecheck = "mypy src"
+checks = { composite = ["format", "lint", "typecheck"] }
+export = "pyinstaller -F -n lutris-coverup src/lutris_coverup/__main__.py"
