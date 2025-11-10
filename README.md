@@ -15,7 +15,7 @@ Cover Up is a CLI application meant to aid with downloading missing covers, bann
 1. Download `lutris-coverup` from [releases](https://github.com/callmenoodles/lutris-coverup/releases)
 2. Make the binary executable: 
 ```commandline
-# chmod +x lutris-coverup`
+# chmod +x lutris-coverup
 ```
 
 ### System-wide installation
