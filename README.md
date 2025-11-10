@@ -13,7 +13,15 @@ Cover Up is a CLI application meant to aid with downloading missing covers, bann
  
 ## Installation
 1. Download `lutris-coverup` from [releases](https://github.com/callmenoodles/lutris-coverup/releases)
-2. Optionally place the binary in `/usr/local/bin` to make it available system-wide
+2. Make the binary executable: 
+```commandline
+# chmod +x lutris-coverup`
+```
+
+### System-wide installation
+```commandline
+# mv lutris-coverup /usr/local/bin
+```
 
 ## Usage
 ```commandline
