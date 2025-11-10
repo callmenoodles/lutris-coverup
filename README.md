@@ -25,7 +25,7 @@ Cover Up is a CLI application meant to aid with downloading missing covers, bann
 
 ## Usage
 ```commandline
-lutris-coverup -k <STEAMGRIDDB_API_KEY>
+$ lutris-coverup -k <STEAMGRIDDB_API_KEY>
 ```
 ### Options
 ```commandline
