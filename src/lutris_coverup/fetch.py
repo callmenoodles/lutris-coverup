@@ -22,6 +22,11 @@ ICON_SIZE = 128  # width and height, since icons are 1:1
 def fetch_icons(sgdb, games, path):
     for game in games:
         res = sgdb.search_game(game)
+
+        if not res:
+            logger.warning(f"Unable to find {game} on SteamGridDB")
+            break
+
         game_name = res[0].name
 
         if not res:
@@ -48,6 +53,11 @@ def fetch_icons(sgdb, games, path):
 def fetch_banners(sgdb, games, path, resize):
     for game in games:
         res = sgdb.search_game(game)
+
+        if not res:
+            logger.warning(f"Unable to find {game} on SteamGridDB")
+            break
+
         game_name = res[0].name
 
         if not res:
@@ -119,6 +129,11 @@ def fetch_banners(sgdb, games, path, resize):
 def fetch_cover_art(sgdb, games, path, resize):
     for game in games:
         res = sgdb.search_game(game)
+
+        if not res:
+            logger.warning(f"Unable to find {game} on SteamGridDB")
+            break
+
         game_name = res[0].name
 
         if not res:
