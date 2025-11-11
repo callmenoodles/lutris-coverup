@@ -22,7 +22,11 @@ logger: Logger = logging.getLogger(__name__)
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.help_option("-h", "--help")
 @click.version_option(
-    None, "-v", "--version", prog_name="lutris-coverup", message="%(prog)s v%(version)s"
+    "0.1.1",
+    "-v",
+    "--version",
+    prog_name="lutris-coverup",
+    message="%(prog)s v%(version)s",
 )
 @click.option(
     "-k",
@@ -45,6 +49,7 @@ logger: Logger = logging.getLogger(__name__)
     "-t",
     "--target",
     default=AssetType.ALL,
+    show_default=True,
     type=click.Choice(AssetType, case_sensitive=False),
     help="The assets to be updated",
 )

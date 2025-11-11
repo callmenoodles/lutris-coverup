@@ -37,7 +37,7 @@ $ lutris-coverup -k <STEAMGRIDDB_API_KEY>
                                   Specify whether the new assets should be stretched or
                                   cropped to fill  [default: STRETCH]
   -t, --target [all|covers|banners|icons]
-                                  The assets to be updated
+                                  The assets to be updated  [default: ALL]
   -l, --lutris-path DIRECTORY     Path to the directory containing coverart, banners, and
                                   pga.db  [default: ~/.local/share/lutris]
   -i, --icon-path DIRECTORY       Path to the directory containing the game icons  [default:
