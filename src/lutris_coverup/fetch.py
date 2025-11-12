@@ -39,15 +39,19 @@ def fetch_icons(sgdb, games, path):
                 logger.warning(f'No icons available for "{game_name}"')
             else:
                 icon_req = requests.get(icon[0].url)
-                img_path = path.joinpath("lutris_" + game).with_suffix(".png")
 
-                with open(img_path, "wb") as f:
-                    f.write(icon_req.content)
+                try:
+                    img_path = path.joinpath("lutris_" + game).with_suffix(".png")
 
-                icon_img = Image.open(img_path)
-                icon_img.thumbnail((ICON_SIZE, ICON_SIZE))
-                icon_img.save(img_path)
-                logger.info(f'Successfully updated icon for "{game_name}"')
+                    with open(img_path, "wb") as f:
+                        f.write(icon_req.content)
+
+                    icon_img = Image.open(img_path)
+                    icon_img.thumbnail((ICON_SIZE, ICON_SIZE))
+                    icon_img.save(img_path)
+                    logger.info(f'Successfully updated icon for "{game_name}"')
+                except Exception as e:
+                    logger.error(e)
 
 
 def fetch_banners(sgdb, games, path, resize):
@@ -87,43 +91,52 @@ def fetch_banners(sgdb, games, path, resize):
                 else:
                     logo_req = requests.get(logos[0].url)
 
-                    tmp_logo = tempfile.TemporaryFile()
-                    tmp_logo.write(logo_req.content)
-                    logo_img = Image.open(tmp_logo)
-                    logo_img.thumbnail(
-                        (banner_img.width - banner_img.width * 0.3, banner_img.height)
-                    )
+                    try:
+                        tmp_logo = tempfile.TemporaryFile()
+                        tmp_logo.write(logo_req.content)
+                        logo_img = Image.open(tmp_logo).convert("RGBA")
+                        logo_img.thumbnail(
+                            (
+                                banner_img.width - banner_img.width * 0.3,
+                                banner_img.height,
+                            )
+                        )
 
-                    banner_img.paste(
-                        logo_img,
-                        (
-                            int((banner_img.width - logo_img.width) / 2),
-                            int((banner_img.height - logo_img.height) / 2),
-                            int(
-                                banner_img.width
-                                - (banner_img.width - logo_img.width) / 2
+                        banner_img.paste(
+                            logo_img,
+                            (
+                                int((banner_img.width - logo_img.width) / 2),
+                                int((banner_img.height - logo_img.height) / 2),
+                                int(
+                                    banner_img.width
+                                    - (banner_img.width - logo_img.width) / 2
+                                ),
+                                int(
+                                    banner_img.height
+                                    - (banner_img.height - logo_img.height) / 2
+                                ),
                             ),
-                            int(
-                                banner_img.height
-                                - (banner_img.height - logo_img.height) / 2
-                            ),
-                        ),
-                        logo_img,
-                    )
+                            logo_img,
+                        )
+                    except Exception as e:
+                        logger.error(e)
 
                 # FIXME: Hardcoded sizes
-                if resize == ResizeMethod.STRETCH:
-                    banner_img = banner_img.resize(
-                        (LUTRIS_BANNER_WIDTH, LUTRIS_BANNER_HEIGHT)
-                    )
-                elif resize == ResizeMethod.CROP:
-                    cropped_img = banner_img.crop((133, 0, 1786, 620))
-                    banner_img = cropped_img.resize(
-                        (LUTRIS_BANNER_WIDTH, LUTRIS_BANNER_HEIGHT)
-                    )
+                try:
+                    if resize == ResizeMethod.STRETCH:
+                        banner_img = banner_img.resize(
+                            (LUTRIS_BANNER_WIDTH, LUTRIS_BANNER_HEIGHT)
+                        )
+                    elif resize == ResizeMethod.CROP:
+                        cropped_img = banner_img.crop((133, 0, 1786, 620))
+                        banner_img = cropped_img.resize(
+                            (LUTRIS_BANNER_WIDTH, LUTRIS_BANNER_HEIGHT)
+                        )
 
-                banner_img.save(img_path)
-                logger.info(f'Successfully updated banner for "{game_name}"')
+                    banner_img.save(img_path)
+                    logger.info(f'Successfully updated banner for "{game_name}"')
+                except Exception as e:
+                    logger.error(e)
 
 
 def fetch_cover_art(sgdb, games, path, resize):
@@ -146,25 +159,29 @@ def fetch_cover_art(sgdb, games, path, resize):
                 logger.warning(f'No covers available for "{game_name}"')
             else:
                 grid_req = requests.get(grid[0].url)
-                img_path = path.joinpath(game).with_suffix(".jpg")
 
-                with open(img_path, "wb") as f:
-                    f.write(grid_req.content)
+                try:
+                    img_path = path.joinpath(game).with_suffix(".jpg")
 
-                cover_img = Image.open(img_path)
+                    with open(img_path, "wb") as f:
+                        f.write(grid_req.content)
 
-                # FIXME: Hardcoded sizes
-                if resize == ResizeMethod.STRETCH:
-                    cover_img = cover_img.resize(
-                        (LUTRIS_COVER_WIDTH, LUTRIS_COVER_HEIGHT)
-                    )
-                elif resize == ResizeMethod.CROP:
-                    cropped_img = cover_img.crop(
-                        (0, COVER_CROP_MARGIN, 600, 900 - COVER_CROP_MARGIN)
-                    )
-                    cover_img = cropped_img.resize(
-                        (LUTRIS_COVER_WIDTH, LUTRIS_COVER_HEIGHT)
-                    )
+                    cover_img = Image.open(img_path)
 
-                cover_img.save(img_path)
-                logger.info(f'Successfully updated cover for "{game_name}"')
+                    # FIXME: Hardcoded sizes
+                    if resize == ResizeMethod.STRETCH:
+                        cover_img = cover_img.resize(
+                            (LUTRIS_COVER_WIDTH, LUTRIS_COVER_HEIGHT)
+                        )
+                    elif resize == ResizeMethod.CROP:
+                        cropped_img = cover_img.crop(
+                            (0, COVER_CROP_MARGIN, 600, 900 - COVER_CROP_MARGIN)
+                        )
+                        cover_img = cropped_img.resize(
+                            (LUTRIS_COVER_WIDTH, LUTRIS_COVER_HEIGHT)
+                        )
+
+                    cover_img.save(img_path)
+                    logger.info(f'Successfully updated cover for "{game_name}"')
+                except Exception as e:
+                    logger.error(e)

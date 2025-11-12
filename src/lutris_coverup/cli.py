@@ -22,7 +22,7 @@ logger: Logger = logging.getLogger(__name__)
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.help_option("-h", "--help")
 @click.version_option(
-    "0.1.1",
+    "0.1.2",
     "-v",
     "--version",
     prog_name="lutris-coverup",
@@ -91,8 +91,8 @@ def cli(
         query: sqlite3.Cursor = conn.execute("SELECT slug FROM games")
         res: List[Any] = query.fetchall()
 
-        for slug in res:
-            slug = slug[0]  # slug_res returns ('slug',)
+        for slug in res:  # slug returns ('slug',)
+            slug = slug[0]
 
             if target is AssetType.COVERS or target is AssetType.ALL:
                 game_cover_path: Path = cover_art_path.joinpath(slug).with_suffix(

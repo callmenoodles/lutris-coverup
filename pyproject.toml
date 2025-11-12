@@ -1,6 +1,6 @@
 [project]
 name = "lutris-coverup"
-version = "0.1.1"
+version = "0.1.2"
 authors = [
     { name = "callmenoodles", email = "noodles@udon.md" },
 ]
