@@ -15,7 +15,7 @@ Cover Up is a CLI application meant to aid with downloading missing covers, bann
 1. Download `lutris-coverup` from [releases](https://github.com/callmenoodles/lutris-coverup/releases)
 2. Make the binary executable: 
 ```commandline
-# chmod +x lutris-coverup
+$ chmod +x lutris-coverup
 ```
 
 ### System-wide installation
@@ -64,7 +64,7 @@ Icons are all square 1:1 images.
 Use this if you only want to update covers, banners, **or**, icons.
 
 #### Lutris Path
-Lutris stores game covers in `coverart`, banners in `banners`, and all your games' information in a SQLite database called `pga.db`.
+Lutris stores game covers in `coverart`, banners in `banners`, and all your games' information in an SQLite database called `pga.db`.
 
 #### Icon Path
 Lutris stores game icons in a separate directory `icons/hicolor/128x128/apps`.
